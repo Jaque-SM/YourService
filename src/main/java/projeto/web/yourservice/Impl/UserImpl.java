@@ -17,10 +17,10 @@ public class UserImpl implements UserService{
     private UserRepository user_services;
 
     @Override
-    public User addUser(User user) {
+    public User addUser(User user) throws Exception {
         Optional<User> user1=user_services.findByEmail(user.getEmail());
         if (user1!=null&&user1.equals(user)){
-       // throw new NegocioException("Ja existe um User com esse email");
+        	throw new Exception("Ja existe um User com esse email");
       
         }
 
@@ -32,7 +32,7 @@ public class UserImpl implements UserService{
         var user2=ViewUser(id);
 
         if (!user_services.existsById(id)){
-            return "Nao existe User com esse Id";
+            return "Não existe User com esse Id";
         }
         user_services.deleteById(id);
         
@@ -53,6 +53,7 @@ public class UserImpl implements UserService{
     public List<User> ListUser() {
         return user_services.findAll();
     }
+    
     public User findByEmail(String email) {
 		Optional<User> user1=user_services.findByEmail(email);
 		if (user1!=null){

@@ -8,7 +8,9 @@ import projeto.web.yourservice.model.User;
 
 @Service
 public interface UserService {
-    public abstract User addUser(User user);
+	
+	
+    public abstract User addUser(User user) throws Exception;
 
     public abstract String removeUser(Long id);
 

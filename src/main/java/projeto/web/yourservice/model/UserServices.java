@@ -1,5 +1,7 @@
 package projeto.web.yourservice.model;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,11 +17,10 @@ import net.bytebuddy.utility.nullability.NeverNull;
 
 @Entity
 @Table(name="service")
-public class Service {
+public class UserServices {
     
     @Id
     private String Id;
-    
     @Column
     private Float price;
     @Column
@@ -29,7 +30,7 @@ public class Service {
     private Categoria category;
     
     @Column
-    private User user;
+    private User user_id;
 
     public void setId(String id) {
         Id = id;
@@ -56,10 +57,35 @@ public class Service {
         return description;
     }
     public void setUser(User user) {
-        this.user = user;
+        this.user_id = user;
     }
     public User getUser() {
-        return user;
+        return user_id;
     }
+	@Override
+	public int hashCode() {
+		return Objects.hash(Id, category, description, price, user_id);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserServices other = (UserServices) obj;
+		return Objects.equals(Id, other.Id) && Objects.equals(category, other.category)
+				&& Objects.equals(description, other.description) && Objects.equals(price, other.price)
+				&& Objects.equals(user_id, other.user_id);
+	}
+	@Override
+	public String toString() {
+		return "UserServices [Id=" + Id + ", price=" + price + ", description=" + description + ", category=" + category
+				+ ", user=" + user_id + "]";
+	}
+    
+    
+	
     
 }

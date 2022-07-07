@@ -116,8 +116,6 @@ public class User implements Serializable {
 	}
 
 
-	
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(Id, email, name, password, phone, photo);
@@ -145,12 +143,6 @@ public class User implements Serializable {
 
 
 
-	public static Object builder() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 
 
     

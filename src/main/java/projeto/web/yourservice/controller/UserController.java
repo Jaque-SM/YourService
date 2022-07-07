@@ -1,6 +1,8 @@
 package projeto.web.yourservice.controller;
 
 import java.util.List;
+import java.util.Optional;
+
 import javax.validation.Valid;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -11,9 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import projeto.web.yourservice.Impl.UserImpl;
 import projeto.web.yourservice.model.User;
@@ -34,30 +38,49 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User addUser(@Valid @RequestBody User user){
+    public User addUser(@Valid @RequestBody User user) throws Exception{
         return user_service.addUser(user);
     }
+    
 
     @DeleteMapping("/{UserId}")
-    public String removeUser(@PathVariable Long UserId, @RequestBody User user){
+    public ResponseEntity <String> removeUser(@PathVariable Long UserId, @RequestBody User user){
 
         if (user_service.ViewUser(UserId)==null){
-            return "Nao encontrado o User";
+        	
+            return ResponseEntity.ok("Nao encontrado o User");
         }
         user_service.removeUser(UserId);
-        return "User removido com sucesso";
+        return ResponseEntity.ok("Encontrado o User");
 
+        
     }
+    
     @PutMapping("/{UserId}")
-    public String atualizarUser(@Valid @PathVariable Long UserId, @RequestBody User user  ){
+    public ResponseEntity <String>  atualizarUser(@Valid @PathVariable Long UserId, @RequestBody User user  ) throws Exception{
     
         if (user_service.ViewUser(UserId)==null){
-            return "Nao existe User com esse ID";
+            return ResponseEntity.ok("Nao existe User com esse ID");
 
         }
         user.setId(UserId);
         user=user_service.addUser(user);
-        return user.toString();
+        return ResponseEntity.ok(user.toString());
+    }
+    
+    
+    @RequestMapping(value = "/{UserId}", method = RequestMethod.GET)
+    public ResponseEntity<User> SearchById(@Valid @PathVariable Long UserId){
+    	Optional<User> user = Optional.ofNullable(user_service.ViewUser(UserId));
+    	
+    	
+    	if (user_service.ViewUser(UserId)==null) {
+    		return ResponseEntity.notFound().build();
+    	}
+    	
+    	user_service.ViewUser(UserId);
+    	return ResponseEntity.ok(user.get());
+    	
     }
 
    
