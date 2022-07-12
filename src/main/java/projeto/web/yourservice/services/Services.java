@@ -18,9 +18,7 @@ public interface Services {
 	public abstract UserServices UpdateService(Long id, UserServices servicos);
 	
 	public abstract List ListServices();
-	
-	public abstract UserServices SearchService(String name);
-	
+		
 	public abstract UserServices ViewService(String name);
 	
 

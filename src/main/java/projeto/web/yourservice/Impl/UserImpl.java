@@ -41,7 +41,7 @@ public class UserImpl implements UserService{
 
     @Override
     public User updateUser(Long id, User user) {
-        if (user_services.existsById(id)){
+        if (!user_services.existsById(id)){
             return null;
         }
         user.setId(id);

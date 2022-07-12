@@ -44,7 +44,17 @@ public class ServiceImpl implements Services{
 	@Override
 	public UserServices UpdateService(Long id, UserServices servicos) {
 
-		return null;
+		if (!serves.existsById(id)){
+			
+			return null;
+		}
+		
+		String idString=String.valueOf(id);
+		
+		servicos.setId(idString);
+		servicos=serves.save(servicos);
+		
+		return servicos;
 	}
 
 	@Override
@@ -52,13 +62,6 @@ public class ServiceImpl implements Services{
 		return serves.findAll();
 	}
 
-	@Override
-	public UserServices SearchService(String name) {
-		
-		
-		
-		return null;
-	}
 
 	@Override
 	public UserServices ViewService(String name) {
@@ -70,7 +73,7 @@ public class ServiceImpl implements Services{
 	        return null;
 
 	  }
-		
+
 		
 		
 	
