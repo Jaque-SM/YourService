@@ -17,10 +17,11 @@ import net.bytebuddy.utility.nullability.NeverNull;
 
 @Entity
 @Table(name="service")
-public class UserServices {
+public class Servico {
     
     @Id
-    private String Id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long Id;
     @Column
     private Float price;
     @Column
@@ -32,10 +33,10 @@ public class UserServices {
     @Column
     private User user_id;
 
-    public void setId(String id) {
+    public void setId(Long id) {
         Id = id;
     }
-    public String getId() {
+    public Long getId() {
         return Id;
     }
     public void setCategory(Categoria category) {
@@ -74,7 +75,7 @@ public class UserServices {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserServices other = (UserServices) obj;
+		Servico other = (Servico) obj;
 		return Objects.equals(Id, other.Id) && Objects.equals(category, other.category)
 				&& Objects.equals(description, other.description) && Objects.equals(price, other.price)
 				&& Objects.equals(user_id, other.user_id);

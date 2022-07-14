@@ -51,7 +51,7 @@ public class UserController {
             return ResponseEntity.ok("Nao encontrado o User");
         }
         user_service.removeUser(UserId);
-        return ResponseEntity.ok("Encontrado o User");
+        return ResponseEntity.ok("Encontrado  User");
 
         
     }
@@ -63,8 +63,7 @@ public class UserController {
             return ResponseEntity.ok("Nao existe User com esse ID");
 
         }
-        user.setId(UserId);
-        user=user_service.addUser(user);
+        user_service.updateUser(UserId, user);
         return ResponseEntity.ok(user.toString());
     }
     

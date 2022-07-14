@@ -52,20 +52,8 @@ public class User implements Serializable {
     
     @Column(name = "password")
     @Length(min = 5, message = "*Your password must have at least 5 characters")
-    @NotEmpty(message = "*Please provide your password")
     private String password;
     
-	@ManyToMany(fetch = FetchType.EAGER)
-	private Set<Perfil> perfis;
-	
-	
-	public Set<Perfil> getPerfis() {
-		return perfis;
-	}
-
-	public void setPerfis(Set<Perfil> perfis) {
-		this.perfis = perfis;
-	}
 
 	public Long getId() {
 		return Id;

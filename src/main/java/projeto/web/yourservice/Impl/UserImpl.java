@@ -16,10 +16,11 @@ public class UserImpl implements UserService{
     @Autowired
     private UserRepository user_services;
 
+    
     @Override
     public User addUser(User user) throws Exception {
         Optional<User> user1=user_services.findByEmail(user.getEmail());
-        if (user1!=null&&user1.equals(user)){
+        if (user1!=null&&user1.equals(user.getEmail())){
         	throw new Exception("Ja existe um User com esse email");
       
         }
